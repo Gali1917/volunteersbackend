@@ -1,8 +1,11 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
 import tareasRouter from '../routes/tareas.routes.js';
+import sgMail from "@sendgrid/mail";
 
 const app = express();
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 //Middleware
 app.use(express.json());
