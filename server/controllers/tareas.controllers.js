@@ -1,4 +1,3 @@
-import { trusted } from "mongoose";
 import Tareas from "../models/Tareas.js";
 import { uploadImage, deleteImage } from "../libs/cloudinary.js";
 import fs from "fs-extra";
