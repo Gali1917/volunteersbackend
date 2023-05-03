@@ -14,6 +14,9 @@ app.use(fileUpload({
     tempFileDir: './upload'
 }))
 
+app.get("/", (req, res) =>{
+    res.send("Home");
+})
 //Routes
 app.use(tareasRouter);
 
