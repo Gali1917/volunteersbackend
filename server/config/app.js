@@ -11,7 +11,9 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 app.use(express.json());
 app.use(fileUpload({
     useTempFiles: true,
-    tempFileDir: './upload'
+    // tempFileDir: './upload'
+    tempFileDir: 'C:/upload'
+
 }))
 
 app.get("/", (req, res) =>{
