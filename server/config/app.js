@@ -1,13 +1,14 @@
 import express from "express";
 import fileUpload from "express-fileupload";
-import { Jwt } from "jsonwebtoken";
-import expressJwt from "express-jwt";
-import { config } from "./config.js";
 import tareasRouter from "../routes/tareas.routes.js";
 import sgMail from "@sendgrid/mail";
-import userRouter from "../routes/access.routes.js";
+import userRouter from "../routes/user.routes.js";
+import authRouter from "../routes/auth.routes.js";
+import { createRoles } from "../libs/initialSetup.js";
+
 
 const app = express();
+createRoles();
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -22,22 +23,13 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.send("Home");
+  res.send("Home of Volunteers");
 });
 //Routes
-app.use(tareasRouter);
+app.use('/api', tareasRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
 
 //JWT
-app.use(
-  expressJwt({ secret: config.secret }).unless({ path: ["/login", "/signup"] })
-);
-
-const authentication = (req, res, next) => {
-  if (req.user) {
-    next();
-  } else {
-    return res.status(401).json({ error: "Acceso no autorizado" });
-  }
-};
 
 export default app;
