@@ -1,15 +1,14 @@
 import express from "express";
 import fileUpload from "express-fileupload";
-import expressJwt from "express-jwt";
-import { config } from "./config";
 import tareasRouter from "../routes/tareas.routes.js";
 import sgMail from "@sendgrid/mail";
-import userRouter from "../routes/access.routes.js";
+import userRouter from "../routes/user.routes.js";
 import authRouter from "../routes/auth.routes.js";
 import { createRoles } from "../libs/initialSetup.js";
 
 
 const app = express();
+createRoles();
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 

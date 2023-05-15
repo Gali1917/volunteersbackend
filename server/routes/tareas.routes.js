@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as tareasCtrl from "../controllers/tareas.controllers.js";
 import { postEmail } from "../controllers/email.controllers.js";
-import { authJwt } from "../middlewares";
+import { authJwt } from "../middlewares/index.js";
 
 const router = Router();
 
