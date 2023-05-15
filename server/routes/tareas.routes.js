@@ -1,19 +1,15 @@
 import { Router } from "express";
-import { getTareas } from "../controllers/tareas.controllers.js";
-import { postTareas } from "../controllers/tareas.controllers.js";
-import { putTareas } from "../controllers/tareas.controllers.js";
-import { deleteTareas } from "../controllers/tareas.controllers.js";
-import { getTareasId } from "../controllers/tareas.controllers.js";
+import * as tareasCtrl from "../controllers/tareas.controllers.js";
 import { postEmail } from "../controllers/email.controllers.js";
+import { authJwt } from "../middlewares";
 
 const router = Router();
 
-router.get('/tareas', getTareas);
-router.post('/tareas', postTareas);
-router.put('/tareas/:id', putTareas);
-router.delete('/tareas/:id', deleteTareas);
-
-router.get('/tareas/:id', getTareasId);
+router.get('/tareas', tareasCtrl.getTareas);
+router.post('/tareas', [authJwt.verifyToken, authJwt.isModerator], tareasCtrl.postTareas);
+router.put('/tareas/:id', [authJwt.verifyToken, authJwt.isModerator], tareasCtrl.putTareas);
+router.delete('/tareas/:id', [authJwt.verifyToken, authJwt.isAdmin], tareasCtrl.deleteTareas);
+router.get('/tareas/:id', tareasCtrl.getTareasId);
 
 router.post('/send-email', postEmail);
 

@@ -15,6 +15,9 @@ const tareasSchema = new mongoose.Schema({
         url: String,
         public_id: String,
     }
+}, {
+    timestamps: true,
+    versionKey: false
 })
 
 export default mongoose.model('Tareas', tareasSchema);
