@@ -10,7 +10,15 @@ import { createRoles } from "../libs/initialSetup.js";
 const app = express();
 createRoles();
 
+//Envio de mails
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+//Configuracion del CORS
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'https://evolunteers.org/');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 //Middleware
 app.use(express.json());
