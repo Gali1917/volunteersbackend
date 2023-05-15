@@ -1,7 +1,6 @@
-import express from "express";
-import { Jwt } from "jsonwebtoken";
-import config from "../config/config";
-import User from "../models/User";
+
+import config from "../config/config.js";
+import User from "../models/User.js";
 
 export const postLogin = (req, res) => {
   try {

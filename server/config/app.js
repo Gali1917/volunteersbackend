@@ -2,7 +2,7 @@ import express from "express";
 import fileUpload from "express-fileupload";
 import { Jwt } from "jsonwebtoken";
 import expressJwt from "express-jwt";
-import { config } from "./config";
+import { config } from "./config.js";
 import tareasRouter from "../routes/tareas.routes.js";
 import sgMail from "@sendgrid/mail";
 import userRouter from "../routes/access.routes.js";
