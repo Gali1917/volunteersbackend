@@ -31,11 +31,12 @@ export const signup = async (req, res) => {
   });
   res.status(200).json({ token });
 };
+
 export const signin = async (req, res) => {
   const userFound = await User.findOne({ email: req.body.email }).populate(
     "roles"
   );
-  if (!userFound) return res.json({ message: "Usuario on encontrado" });
+  if (!userFound) return res.status(401).json({ message: "Usuario on encontrado" });
   const matchPassword = await User.comparePassword(
     req.body.password,
     userFound.password
